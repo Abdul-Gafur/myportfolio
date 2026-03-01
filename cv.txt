@@ -1,0 +1,163 @@
+Abdul-Gafur Saeed
+
+Ghanaian | Sunflower Street, Wa, Upper West Region, Ghana | +233547322637
+abdulgafurshaattir@gmail.com | LinkedIn | Github
+SUMMARY
+Full-Stack Developer and DevOps Engineer with 5+ years of professional experience designing, deploying, and maintaining
+scalable, data-driven web platforms and enterprise systems across Africa. AWS Certified Developer Associate, Cloud
+Practitioner, and Microsoft Certified Azure Developer Associate. Specialist in interactive dashboard development, system
+integration, UX/UI design, technical documentation, and evidence-based reporting. Proven ability to debug and modernise
+legacy systems, eliminate data silos, pilot automation and AI use cases, and institutionalise digital capacity through SOPs
+and capacity-building workshops.
+EDUCATIONAL BACKGROUND
+University for Business and Integrated Development Studies – Wa, Ghana​
+December 2021 – November 2025
+BSc. Computer Science
+Relevant Coursework: Software Engineering; Web Application Development; Database Systems and Design; Information
+Security and Authentication; Algorithms and Data Structures; Systems Analysis and Design; Computer Networks.
+PROFESSIONAL WORK EXPERIENCE
+DevOps Engineer​
+July 2025 - Present
+CloudFruition – London, UK​
+●​ Architected and maintained CI/CD pipelines using GitHub Actions and Jenkins across a 12-engineer distributed team,
+reducing deployment time by 40% and accelerating software delivery across 6+ production environments.
+●​ Debugged and improved existing infrastructure codebases, enforcing data consistency standards and eliminating
+configuration drift across staging and production environments.
+●​ Automated infrastructure provisioning with Terraform and AWS CloudFormation, cutting manual configuration overhead
+by 60% and establishing reproducible, version-controlled environment builds that eliminate future technical debt.
+●​ Deployed AWS CloudWatch, Prometheus, and Grafana monitoring dashboards for real-time system observability,
+achieving 99.9% uptime SLA across all managed services.
+●​ Enforced least-privilege IAM roles, user authentication protocols, and application security policies, reducing
+unauthorised access risk and improving compliance posture.
+Technical Lead and Full-Stack Developer​
+December 2022 - Present
+Paahibu Space – Wa, Ghana​
+●​ Architected and deployed Ndiara (ndiara.vercel.app) - a full-stack digital ecosystem for African women entrepreneurs
+built on Laravel (API backend) and Next.js (frontend), with UX/UI designed in Figma, currently serving 2,000+ active
+users across Africa and directly aligned with AU Agenda 2063 Aspiration 6.
+●​ Designed and deployed interactive web portals and real-time monitoring dashboards by integrating 6 independent
+sub-platforms (E-Commerce, Academy, POS, HRM, Accounts, Community) via a centralised RESTful API middleware eliminating fragmented data silos, resolving interoperability challenges, ensuring data consistency across the
+organisation, and eliminating cross-platform technical debt. Developed user-centric designs and intuitive digital
+workflows to reduce friction for non-technical staff, directly supporting platform adoption and reducing resistance to
+new processes across 100+ women-led businesses.
+●​ Integrated mobile money (MTN, M-Pesa, Airtel), card processing (Visa, Mastercard), and global transfers (SWIFT, Wise)
+into a centralised financial reporting module, providing stakeholders with verifiable, structured data for evidence-based
+decision-making.
+●​ Authored comprehensive technical documentation including SOPs, architectural blueprints, system integration guides,
+and deployment runbooks - preserving the institutional memory of all technical systems and reducing
+single-point-of-failure dependency.
+●​ Designed and facilitated 20+ technical capacity-building workshops empowering 200+ girls with STEAM and software
+engineering skills using curriculum adapted for non-technical audiences - advancing digital inclusion and youth
+empowerment.
+Full-Stack Developer​
+June 2023 - December 2024
+Namibra Inc – Kumasi, Ghana
+●​ Built and launched a full-stack e-commerce platform with system integration into a custom ERP system (Laravel,
+React.js, MySQL), streamlining business operations by 30% (from 14-step manual workflows to 4-step automated
+processes) and improving UX/UI design for non-technical end-users.
+
+●​ Debugged, maintained, and improved existing legacy codebases across 3 client platforms, ensuring systems remained
+functional, secure, and aligned with evolving user needs while minimising service downtime.
+●​ Integrated ERP modules - inventory, order management, and financials - via RESTful APIs, establishing interoperability
+protocols and data consistency standards that eliminated cross-departmental data duplication.
+●​ Participated in 15+ agile sprint cycles and 50+ code reviews using Git/GitHub version control and Docker, consistently
+improving code quality and deployment velocity.
+●​ Built and maintained 5+ custom web platforms for 100+ women-led businesses using Laravel, JavaScript, and MySQL,
+improving operational efficiency, digital presence, and customer engagement across Ghana.
+EXTRACURRICULAR ACTIVITIES
+Developer and Founder, SmartSakuu ​
+February 2021 - Present
+Designed and deployed a full-stack institutional management platform digitising school operations - centralising academic
+records, administrative workflows, and financial reporting into a unified dashboard for non-technical staff.
+Developer, PayFast Gift Card Trading Platform ​
+November 2025 - Present
+Built a full-stack gift card trading platform featuring secure payment flows, real-time transaction processing dashboard,
+multi-currency support, user authentication, and role-based access control.
+SKILLS
+●​HTML5
+●​CSS5
+●​Javasript (ES6+)
+●​React
+●​Vue
+●​Angular
+●​UI/UX Design
+●​ERP integration
+●​SOP Drafting
+●​Microsoft 365
+●​Power BI
+
+●​PHP (Laravel)
+●​Python (Django, Flask)
+●​Node.js
+●​RESTful API Design
+●​MySQL and PostgreSQL
+●​Financial Modules
+●​Order Workflows
+●​Architectural Blueprints
+●​Curriculum Design
+●​Problem Solving
+●​Inventory Management
+
+CERTIFICATIONS AND AWARDS
+●​AWS Certified Developer – Associate
+●​Microsoft Certified: Azure Developer Associate
+●​Finalist – MTN Ayoba Hackathon 2021
+
+●​Webhook APIs
+●​API Middleware Architecture
+●​ERP/SAP Integration
+●​Payment APIs (Paystack, SWIFT)
+●​Interoperability Protocols
+●​Version Control (Git, Github, Gitlab)
+●​Technical Documentation
+●​Deployment Runbooks
+●​Cross Functional Collaboration
+●​Evidence-Based Reporting
+●​Non-Technical Communication
+
+●​AWS Certified Cloud Practitioner
+●​NoniHub Award – AI Innovation
+●​Postman API Student Expert
+
+INTERESTS
+●​Gender Equality and Women Empowerment Through Technology
+●​Africa's Digital Transformation and AU Agenda 2063
+●​Youth Development and STEAM Education
+LANGUAGES
+●​Dagaare - Native
+
+●​English - Expert
+
+REFERENCES
+Hiqmat Sungdeme Saani
+Director, Paahibu Space
+Phone: +233 20 760 6140 / +233 24 725 4326
+hiqmatsungdemes@gmail.com
+Dr. Nana Yaw Afriyie
+Vice Dean, UBIDS
+Phone: +233 24 677 8580
+yafriyie@ubids.edu.gh
+Sumaila Chakurah
+CEO, Noni Hub
+Phone: +233 54 183 7332
+sumaila@nonihub.org
+
+●​AWS​
+●​GCP
+●​Azure
+●​Docker
+●​Kubernetes
+●​Terraform
+●​VS Code
+●​Delegation
+●​Empathy
+●​Capacity Building
+
+●​Open-Source Development and Cloud Infrastructure
+●​AI Innovation and Data-Driven Policy Solutions
+
+●​French - Beginner
+
+●​Arabic - Beginner
+
+

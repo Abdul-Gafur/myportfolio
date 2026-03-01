@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+
+@theme {
+  --color-primary: #833cf6;
+  --color-primary-dark: #6b2cc5;
+  --color-secondary: #2e2839;
+  --color-accent-cyan: #0ea5e9;
+  --color-background-light: #f7f5f8;
+  --color-background-dark: #171022;
+  --color-background-card: #201b27;
+  
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+
+  --animate-fade-in-up: fadeInUp 0.5s ease-out forwards;
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  ::-webkit-scrollbar {
+      width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+      background: #171022;
+  }
+  ::-webkit-scrollbar-thumb {
+      background: #2e2839;
+      border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+      background: #833cf6;
+  }
+}
+
+@layer utilities {
+  .glass-nav {
+      background: rgba(23, 16, 34, 0.8);
+      backdrop-filter: blur(12px);
+  }
+}
