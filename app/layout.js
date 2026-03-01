@@ -15,10 +15,6 @@ const inter = Inter({
 export const metadata = {
   title: "Full-Stack & DevOps Portfolio",
   description: "Building scalable systems and driving digital transformation",
-  icons: {
-    icon: "/profile.jpg",
-    apple: "/profile.jpg",
-  },
 };
 
 export default function RootLayout({ children }) {

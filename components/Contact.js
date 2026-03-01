@@ -1,24 +1,73 @@
+"use client";
+
 import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Contact() {
+  const [result, setResult] = useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending...");
+
+    // Convert form data
+    const formData = new FormData(event.target);
+
+    // IMPORTANT: Replace this with your Web3Forms access key
+    // Get your key at: https://web3forms.com/
+    formData.append("access_key", "1e9db658-3b72-418e-9195-cd32e2a1cb0e");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Message sent successfully!");
+        event.target.reset();
+
+        // Clear success message after 5 seconds
+        setTimeout(() => setResult(""), 5000);
+      } else {
+        console.error("Error", data);
+        setResult(data.message || "An error occurred. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submit Error:", error);
+      setResult("A network error occurred. Please try again.");
+    }
+  };
+
   return (
     <section className="py-20 px-4 bg-[#141118]" id="contact">
-      <div className="max-w-[1000px] mx-auto bg-background-card border border-[#2e2839] rounded-2xl overflow-hidden shadow-2xl">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="max-w-[1000px] mx-auto bg-background-card border border-[#2e2839] rounded-2xl overflow-hidden shadow-2xl"
+      >
         <div className="grid md:grid-cols-2">
           {/* Left: Form */}
-          <div className="p-8 md:p-12">
+          <div className="p-8 md:p-12 relative">
             <span className="text-primary font-bold tracking-widest uppercase text-xs">
               Get in Touch
             </span>
             <h2 className="text-3xl font-bold text-white mt-2 mb-6">
               Let's work together
             </h2>
-            <form className="space-y-4">
+            <form onSubmit={onSubmit} className="space-y-4">
               <div>
                 <label className="block text-slate-400 text-xs uppercase font-bold mb-2">
                   Name
                 </label>
                 <input
+                  name="name"
+                  required
                   className="w-full bg-[#141118] border border-[#2e2839] rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                   placeholder="Abdul"
                   type="text"
@@ -29,6 +78,8 @@ export default function Contact() {
                   Email
                 </label>
                 <input
+                  name="email"
+                  required
                   className="w-full bg-[#141118] border border-[#2e2839] rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                   placeholder="abdulgafurshaattir@gmail.com"
                   type="email"
@@ -39,17 +90,30 @@ export default function Contact() {
                   Message
                 </label>
                 <textarea
+                  name="message"
+                  required
                   className="w-full bg-[#141118] border border-[#2e2839] rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                   placeholder="Tell me about your project..."
                   rows="4"
                 ></textarea>
               </div>
+
               <button
-                className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg transition-colors mt-2"
-                type="button"
+                className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg transition-colors mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                type="submit"
+                disabled={result === "Sending..."}
               >
-                Send Message
+                {result === "Sending..." ? "Sending..." : "Send Message"}
               </button>
+
+              {/* Form Status Message */}
+              {result && result !== "Sending..." && (
+                <div
+                  className={`mt-4 text-sm font-medium ${result.includes("success") ? "text-green-400" : "text-red-400"}`}
+                >
+                  {result}
+                </div>
+              )}
             </form>
           </div>
 
@@ -132,7 +196,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
       {/* Floating WhatsApp Button */}
       <a
         href="https://wa.me/233547322637"

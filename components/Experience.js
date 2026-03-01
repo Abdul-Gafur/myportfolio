@@ -1,4 +1,27 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function Experience() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
     <section
       className="py-20 px-4 bg-background-dark relative overflow-hidden"
@@ -8,21 +31,30 @@ export default function Experience() {
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-[800px] mx-auto">
-        <div className="mb-16 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16 text-center"
+        >
           <span className="text-primary font-bold tracking-widest uppercase text-sm">
             Career Path
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">
             Professional Experience
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="relative pl-8 border-l border-[#2e2839] space-y-12">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="relative pl-8 border-l border-[#2e2839] space-y-12"
+        >
           {/* Item 1 */}
-          <div
-            className="relative group animate-fade-in-up"
-            style={{ animationDelay: "100ms" }}
-          >
+          <motion.div variants={itemVariants} className="relative group">
             <div className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background-dark bg-primary group-hover:scale-125 transition-transform"></div>
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
               <h3 className="text-xl font-bold text-white">DevOps Engineer</h3>
@@ -57,13 +89,10 @@ export default function Experience() {
                 Prometheus / Grafana
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Item 2 */}
-          <div
-            className="relative group animate-fade-in-up"
-            style={{ animationDelay: "200ms" }}
-          >
+          <motion.div variants={itemVariants} className="relative group">
             <div className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background-dark bg-slate-600 group-hover:bg-primary transition-colors"></div>
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
               <h3 className="text-xl font-bold text-white">
@@ -100,13 +129,10 @@ export default function Experience() {
                 Payment APIs
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Item 3 */}
-          <div
-            className="relative group animate-fade-in-up"
-            style={{ animationDelay: "300ms" }}
-          >
+          <motion.div variants={itemVariants} className="relative group">
             <div className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background-dark bg-slate-600 group-hover:bg-primary transition-colors"></div>
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
               <h3 className="text-xl font-bold text-white">
@@ -142,8 +168,55 @@ export default function Experience() {
                 REST APIs
               </span>
             </div>
-          </div>
-        </div>
+          </motion.div>
+
+          {/* Item 4 */}
+          <motion.div variants={itemVariants} className="relative group">
+            <div className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background-dark bg-slate-600 group-hover:bg-primary transition-colors"></div>
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
+              <h3 className="text-xl font-bold text-white">
+                Software Engineer
+              </h3>
+              <span className="text-sm font-medium text-slate-400">
+                2020 - 2021
+              </span>
+            </div>
+            <div className="text-primary text-sm font-medium mb-3">
+              Nifty Global Systems (Part-Time)
+            </div>
+            <ul className="text-slate-400 text-sm leading-relaxed mb-4 list-disc pl-5 space-y-2">
+              <li>
+                Digitized the voting process for 5+ schools by reducing 60% in
+                voting time and manual errors by building a secure online voting
+                platform using PHP, Python and MySQL.
+              </li>
+              <li>
+                Enhanced student records management for a college of 4,000+
+                students as measured by faster results processing and
+                accessibility by designing a custom MIS using PHP, Python,
+                JavaScript, and SQL.
+              </li>
+              <li>
+                Improved delivery and coordination across teams by 25% by
+                collaborating with remote developers using Git and Trello.
+              </li>
+            </ul>
+            <div className="flex flex-wrap gap-2">
+              <span className="text-xs px-2 py-1 bg-[#2e2839] rounded text-slate-300">
+                PHP
+              </span>
+              <span className="text-xs px-2 py-1 bg-[#2e2839] rounded text-slate-300">
+                Python
+              </span>
+              <span className="text-xs px-2 py-1 bg-[#2e2839] rounded text-slate-300">
+                JavaScript
+              </span>
+              <span className="text-xs px-2 py-1 bg-[#2e2839] rounded text-slate-300">
+                MySQL
+              </span>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
