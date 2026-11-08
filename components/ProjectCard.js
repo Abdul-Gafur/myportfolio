@@ -1,29 +1,6 @@
 import Link from "next/link";
 import { Tags, ArrowRight } from "./ui";
 
-/** A compact flow built from the case study's architecture stages. */
-export function MiniFlow({ stages, tone = "light" }) {
-  const dark = tone === "dark";
-  return (
-    <ol className="flex flex-wrap items-center gap-y-2" aria-label="Solution flow">
-      {stages.map((s, i) => (
-        <li key={s.title} className="flex items-center">
-          <span
-            className={`rounded-md border px-2 py-1 font-mono text-[11px] leading-none ${
-              dark ? "border-white/15 text-night-muted" : "border-line bg-paper text-ink-2"
-            }`}
-          >
-            {s.title}
-          </span>
-          {i < stages.length - 1 ? (
-            <span className={`mx-1.5 h-px w-3 ${dark ? "bg-white/25" : "bg-subtle/50"}`} aria-hidden="true" />
-          ) : null}
-        </li>
-      ))}
-    </ol>
-  );
-}
-
 export default function ProjectCard({ project, className = "" }) {
   const p = project;
   const headline = p.results[0];
@@ -44,10 +21,6 @@ export default function ProjectCard({ project, className = "" }) {
       <div className="mt-5">
         <p className="font-mono text-[11px] uppercase tracking-wider text-subtle">My contribution</p>
         <p className="mt-1.5 text-[15px] leading-relaxed text-ink-2">{p.contribution}</p>
-      </div>
-
-      <div className="mt-6">
-        <MiniFlow stages={p.architecture.stages} />
       </div>
 
       <div className="mt-auto pt-8">

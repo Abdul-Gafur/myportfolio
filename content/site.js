@@ -682,7 +682,7 @@ export const EXPERIENCE = [
   {
     org: "African Union Commission",
     role: "Digital & Innovation Expert",
-    note: "AU Tech Fellow · MIS Application Unit",
+    note: "Management Information Systems Division (MISD)",
     dates: "Apr 2026 – Present",
     place: "Addis Ababa, Ethiopia",
     summary:

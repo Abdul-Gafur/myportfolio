@@ -9,7 +9,6 @@ import {
   TextLink,
 } from "@/components/ui";
 import AskAUFeature from "@/components/AskAUFeature";
-import { MiniFlow } from "@/components/ProjectCard";
 import ContactBand from "@/components/ContactBand";
 import { PROJECTS, MORE_WORK, PROFILE } from "@/content/site";
 import { pageMeta } from "@/lib/meta";
@@ -46,9 +45,6 @@ function ProjectRow({ p }) {
           </span>
           {p.contribution}
         </p>
-        <div className="mt-6">
-          <MiniFlow stages={p.architecture.stages} />
-        </div>
         {p.results.length ? (
           <dl className="mt-6 flex flex-wrap gap-x-10 gap-y-4">
             {p.results.map((r) => (
