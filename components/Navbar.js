@@ -1,95 +1,110 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Container } from "./ui";
+
+const LINKS = [
+  { href: "#about", label: "About" },
+  { href: "#work", label: "Work" },
+  { href: "#experience", label: "Experience" },
+  { href: "#contact", label: "Contact" },
+];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-[#2e2839] px-6 md:px-10 py-4"
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
+        scrolled || open ? "border-b border-line bg-paper/90 backdrop-blur-md" : "border-b border-transparent bg-paper/0"
+      }`}
     >
-      <div className="max-w-[1200px] mx-auto flex items-center justify-between">
-        <Link
-          href="/"
-          className="flex items-center gap-3 text-white cursor-pointer group"
-        >
-          <div className="size-8 text-primary group-hover:rotate-12 transition-transform duration-300">
-            <span className="material-symbols-outlined text-3xl">terminal</span>
-          </div>
-          <h2 className="text-white text-xl font-bold tracking-tight">
-            Abdul-Gafur
-          </h2>
-        </Link>
+      <Container className="flex h-16 items-center justify-between">
+        <a href="#top" className="group flex items-center gap-2.5" aria-label="Abdul-Gafur Saeed, back to top">
+          <span className="grid size-8 place-items-center rounded-lg bg-ink font-display text-sm font-bold text-paper transition-transform duration-200 group-hover:-rotate-6">
+            AG
+          </span>
+          <span className="font-display text-[15px] font-semibold tracking-tight">Abdul-Gafur Saeed</span>
+        </a>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex md:static md:flex-row md:items-center gap-8 md:bg-transparent md:p-0 md:border-none md:w-auto">
-          {["About", "Experience", "Projects", "Contact"].map((item) => (
-            <Link
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-slate-300 hover:text-primary text-sm font-medium transition-colors"
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+          {LINKS.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="rounded-md px-3 py-2 text-sm text-muted transition-colors duration-150 hover:bg-wash hover:text-ink"
             >
-              <motion.span whileHover={{ y: -2 }} className="inline-block">
-                {item}
-              </motion.span>
-            </Link>
+              {l.label}
+            </a>
           ))}
         </nav>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="hidden md:flex bg-primary hover:bg-primary-dark text-white text-sm font-bold h-10 px-6 rounded-lg items-center justify-center transition-colors shadow-[0_0_15px_rgba(131,60,246,0.3)]"
-        >
-          Hire Me
-        </motion.button>
+        <div className="hidden items-center gap-2 md:flex">
+          <a
+            href="/Abdul-Gafur_CV.pdf"
+            download="Abdul-Gafur_Saeed_CV.pdf"
+            className="inline-flex h-10 items-center rounded-full bg-ink px-5 text-sm font-medium text-paper transition-colors duration-150 hover:bg-ink-2"
+          >
+            Download CV
+          </a>
+        </div>
 
-        {/* Mobile Menu Icon */}
         <button
-          className="md:hidden text-white flex items-center justify-center"
-          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+          className="grid size-11 place-items-center rounded-full border border-line md:hidden"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={() => setOpen((v) => !v)}
         >
-          <span className="material-symbols-outlined text-3xl">
-            {isOpen ? "close" : "menu"}
-          </span>
+          <svg className="size-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            {open ? (
+              <path d="M5 5l10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            ) : (
+              <path d="M3 7h14M3 13h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            )}
+          </svg>
         </button>
+      </Container>
 
-        {/* Mobile Nav */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.nav
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
-              className="flex flex-col absolute top-[73px] left-0 w-full bg-background-dark p-6 border-b border-[#2e2839] gap-4 shadow-xl z-40 md:hidden"
-            >
-              {["About", "Experience", "Projects", "Contact"].map((item) => (
-                <Link
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  onClick={() => setIsOpen(false)}
-                  className="text-white hover:text-primary text-lg font-medium transition-colors border-b border-[#2e2839] pb-4 last:border-0"
-                >
-                  {item}
-                </Link>
-              ))}
-              <button
-                className="mt-4 bg-primary text-white font-bold h-12 rounded-lg w-full transition-colors"
-                onClick={() => setIsOpen(false)}
+      {open ? (
+        <div id="mobile-menu" className="h-[calc(100dvh-4rem)] border-t border-line bg-paper md:hidden">
+          <Container className="flex flex-col py-4">
+            {LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="border-b border-line py-4 font-display text-2xl font-semibold tracking-tight"
               >
-                Hire Me
-              </button>
-            </motion.nav>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.header>
+                {l.label}
+              </a>
+            ))}
+            <a
+              href="/Abdul-Gafur_CV.pdf"
+              download="Abdul-Gafur_Saeed_CV.pdf"
+              className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-ink text-base font-medium text-paper"
+            >
+              Download CV
+            </a>
+          </Container>
+        </div>
+      ) : null}
+    </header>
   );
 }

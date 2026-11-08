@@ -1,52 +1,117 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/forms";
-@plugin "@tailwindcss/container-queries";
 
+/* Design system (ui-ux-pro-max): Minimal / Swiss + bento grid.
+   Zinc monochrome, one blue accent used sparingly. Archivo display, Inter text, JetBrains Mono labels. */
 @theme {
-  --color-primary: #833cf6;
-  --color-primary-dark: #6b2cc5;
-  --color-secondary: #2e2839;
-  --color-accent-cyan: #0ea5e9;
-  --color-background-light: #f7f5f8;
-  --color-background-dark: #171022;
-  --color-background-card: #201b27;
-  
-  --font-display: var(--font-space-grotesk);
-  --font-body: var(--font-inter);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 
-  --animate-fade-in-up: fadeInUp 0.5s ease-out forwards;
+  --color-paper: #fafafa;
+  --color-card: #ffffff;
+  --color-ink: #09090b;
+  --color-ink-2: #27272a;
+  --color-muted: #52525b;
+  --color-subtle: #71717a;
+  --color-line: #e4e4e7;
+  --color-wash: #f4f4f5;
+  --color-accent: #2563eb;
+  --color-accent-soft: #dbeafe;
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  --animate-rise: rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
   }
 }
 
 @layer base {
-  ::-webkit-scrollbar {
-      width: 8px;
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  ::-webkit-scrollbar-track {
-      background: #171022;
-  }
-  ::-webkit-scrollbar-thumb {
-      background: #2e2839;
-      border-radius: 4px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-      background: #833cf6;
+  ::selection { background: var(--color-ink); color: var(--color-paper); }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 6px; }
+  a, button { cursor: pointer; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-@layer utilities {
-  .glass-nav {
-      background: rgba(23, 16, 34, 0.8);
-      backdrop-filter: blur(12px);
+/* ---------- Card loops (selected work) ----------
+   The layout never moves; motion lives only inside card visuals.
+   Default = the finished frame. [data-loop="auto"] runs on its own (with a pause button),
+   [data-loop="hover"] plays while the pointer rests on the card. Touch devices and
+   reduced-motion users always see the finished frame. Each .lp element names its
+   keyframes in --lp; every cycle is ≤ 4s and ends holding the finished picture. */
+.lp-swap-a { opacity: 0; }
+.lp-ctl { display: none; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .lp-ctl { display: grid; }
+  [data-loop="auto"] .lp,
+  [data-loop="hover"]:hover .lp {
+    animation: var(--lp) var(--cycle, 3.2s) linear infinite both;
   }
+  [data-loop="auto"] .lp-spin,
+  [data-loop="hover"]:hover .lp-spin {
+    animation: lp-spin 0.9s linear infinite;
+  }
+  [data-loop][data-paused] .lp,
+  [data-loop][data-paused] .lp-spin {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes lp-spin { to { transform: rotate(360deg); } }
+
+/* AskAU: search → answer streams line by line → sources attach → hold */
+@keyframes ask-a { 0%, 20% { opacity: 1; } 23%, 96% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes ask-b { 0%, 23% { opacity: 0; } 26%, 93% { opacity: 1; } 96%, 100% { opacity: 0; } }
+@keyframes ask-l1 {
+  0%, 24% { clip-path: inset(0 100% 0 0); opacity: 1; }
+  35%, 93% { clip-path: inset(0 0 0 0); opacity: 1; }
+  97%, 100% { clip-path: inset(0 0 0 0); opacity: 0; }
+}
+@keyframes ask-l2 {
+  0%, 33% { clip-path: inset(0 100% 0 0); opacity: 1; }
+  44%, 93% { clip-path: inset(0 0 0 0); opacity: 1; }
+  97%, 100% { clip-path: inset(0 0 0 0); opacity: 0; }
+}
+@keyframes ask-l3 {
+  0%, 42% { clip-path: inset(0 100% 0 0); opacity: 1; }
+  53%, 93% { clip-path: inset(0 0 0 0); opacity: 1; }
+  97%, 100% { clip-path: inset(0 0 0 0); opacity: 0; }
+}
+@keyframes ask-s1 { 0%, 56% { opacity: 0.25; } 62%, 93% { opacity: 1; } 97%, 100% { opacity: 0.25; } }
+@keyframes ask-s2 { 0%, 62% { opacity: 0.25; } 68%, 93% { opacity: 1; } 97%, 100% { opacity: 0.25; } }
+
+/* ECG: a monitor sweep draws the trace over its faint copy */
+@keyframes ecg-sweep { 0% { clip-path: inset(0 100% 0 0); } 70%, 100% { clip-path: inset(0 0 0 0); } }
+
+/* ScrapTrace: the two score bars fill in turn */
+@keyframes bar-1 { 0% { clip-path: inset(0 100% 0 0); } 30%, 100% { clip-path: inset(0 0 0 0); } }
+@keyframes bar-2 { 0%, 15% { clip-path: inset(0 100% 0 0); } 45%, 100% { clip-path: inset(0 0 0 0); } }
+
+/* EMR: offline with records queued → back online, records synced */
+@keyframes emr-a { 0%, 40% { opacity: 1; } 44%, 95% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes emr-b { 0%, 44% { opacity: 0; } 48%, 92% { opacity: 1; } 95%, 100% { opacity: 0; } }
+
+/* Blue Economy diagram: a pulse runs along the pipeline, left to right */
+@keyframes pipe-run {
+  0% { transform: translateX(-100%); opacity: 0; }
+  6% { opacity: 1; }
+  70% { transform: translateX(0); opacity: 1; }
+  78%, 100% { transform: translateX(0); opacity: 0; }
 }
