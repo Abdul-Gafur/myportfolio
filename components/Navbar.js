@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Container } from "./ui";
+import { NAV, PROFILE } from "@/content/site";
 
-const LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
-];
+function isActive(pathname, href) {
+  const p = (pathname || "/").replace(/\/+$/, "") || "/";
+  return p === href || p.startsWith(`${href}/`);
+}
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -20,6 +22,9 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -34,39 +39,50 @@ export default function Navbar() {
         scrolled || open ? "border-b border-line bg-paper/90 backdrop-blur-md" : "border-b border-transparent bg-paper/0"
       }`}
     >
-      <Container className="flex h-16 items-center justify-between">
-        <a href="#top" className="group flex items-center gap-2.5" aria-label="Abdul-Gafur Saeed, back to top">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-10 focus:rounded-md focus:bg-ink focus:px-3 focus:py-2 focus:text-sm focus:text-paper"
+      >
+        Skip to content
+      </a>
+      <Container className="flex h-16 items-center justify-between gap-6">
+        <Link href="/" className="group flex items-center gap-2.5" aria-label={`${PROFILE.name}, home`}>
           <span className="grid size-8 place-items-center rounded-lg bg-ink font-display text-sm font-bold text-paper transition-transform duration-200 group-hover:-rotate-6">
-            AG
+            {PROFILE.initials}
           </span>
-          <span className="font-display text-[15px] font-semibold tracking-tight">Abdul-Gafur Saeed</span>
-        </a>
+          <span className="font-display text-[15px] font-semibold tracking-tight">{PROFILE.name}</span>
+        </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
-          {LINKS.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="rounded-md px-3 py-2 text-sm text-muted transition-colors duration-150 hover:bg-wash hover:text-ink"
-            >
-              {l.label}
-            </a>
-          ))}
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main">
+          {NAV.map((l) => {
+            const active = isActive(pathname, l.href);
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                aria-current={active ? "page" : undefined}
+                className={`rounded-md px-3 py-2 text-sm transition-colors duration-150 hover:bg-wash hover:text-ink ${
+                  active ? "text-ink" : "text-muted"
+                }`}
+              >
+                {l.label}
+                {active ? <span className="mt-0.5 block h-px bg-ink" aria-hidden="true" /> : null}
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <a
-            href="/Abdul-Gafur_CV.pdf"
-            download="Abdul-Gafur_Saeed_CV.pdf"
-            className="inline-flex h-10 items-center rounded-full bg-ink px-5 text-sm font-medium text-paper transition-colors duration-150 hover:bg-ink-2"
-          >
-            Download CV
-          </a>
-        </div>
+        <a
+          href={PROFILE.cv}
+          download={PROFILE.cvFileName}
+          className="hidden h-10 items-center rounded-full bg-ink px-5 text-sm font-medium text-paper transition-[background-color,transform] duration-150 hover:bg-ink-2 active:scale-[0.98] lg:inline-flex"
+        >
+          Download CV
+        </a>
 
         <button
           type="button"
-          className="grid size-11 place-items-center rounded-full border border-line md:hidden"
+          className="grid size-11 place-items-center rounded-full border border-line lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -83,21 +99,21 @@ export default function Navbar() {
       </Container>
 
       {open ? (
-        <div id="mobile-menu" className="h-[calc(100dvh-4rem)] border-t border-line bg-paper md:hidden">
+        <div id="mobile-menu" className="h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-paper lg:hidden">
           <Container className="flex flex-col py-4">
-            {LINKS.map((l) => (
-              <a
+            {[{ href: "/", label: "Home" }, ...NAV].map((l) => (
+              <Link
                 key={l.href}
                 href={l.href}
-                onClick={() => setOpen(false)}
-                className="border-b border-line py-4 font-display text-2xl font-semibold tracking-tight"
+                aria-current={(l.href === "/" ? pathname === "/" : isActive(pathname, l.href)) ? "page" : undefined}
+                className="border-b border-line py-4 font-display text-2xl font-semibold tracking-tight aria-[current=page]:text-accent"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
             <a
-              href="/Abdul-Gafur_CV.pdf"
-              download="Abdul-Gafur_Saeed_CV.pdf"
+              href={PROFILE.cv}
+              download={PROFILE.cvFileName}
               className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-ink text-base font-medium text-paper"
             >
               Download CV

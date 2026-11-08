@@ -1,22 +1,25 @@
 @import "tailwindcss";
 
-/* Design system (ui-ux-pro-max): Minimal / Swiss + bento grid.
-   Zinc monochrome, one blue accent used sparingly. Archivo display, Inter text, JetBrains Mono labels. */
+/* Design system: editorial professional.
+   White / light neutral ground, deep navy ink, one restrained blue accent.
+   Archivo display, Inter text, JetBrains Mono labels. No gradients, no shadows, no skill bars. */
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 
-  --color-paper: #fafafa;
+  --color-paper: #f8f9fb;
   --color-card: #ffffff;
-  --color-ink: #09090b;
-  --color-ink-2: #27272a;
-  --color-muted: #52525b;
-  --color-subtle: #71717a;
-  --color-line: #e4e4e7;
-  --color-wash: #f4f4f5;
-  --color-accent: #2563eb;
-  --color-accent-soft: #dbeafe;
+  --color-ink: #0b1a33;
+  --color-ink-2: #1c2b45;
+  --color-muted: #475569;
+  --color-subtle: #64748b;
+  --color-line: #e2e6ee;
+  --color-wash: #f0f3f8;
+  --color-accent: #1d4ed8;
+  --color-accent-soft: #e0e9ff;
+  --color-night-muted: #a9b4c7;
+  --color-night-subtle: #7d8aa1;
 
   --animate-rise: rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 
@@ -96,22 +99,3 @@
 }
 @keyframes ask-s1 { 0%, 56% { opacity: 0.25; } 62%, 93% { opacity: 1; } 97%, 100% { opacity: 0.25; } }
 @keyframes ask-s2 { 0%, 62% { opacity: 0.25; } 68%, 93% { opacity: 1; } 97%, 100% { opacity: 0.25; } }
-
-/* ECG: a monitor sweep draws the trace over its faint copy */
-@keyframes ecg-sweep { 0% { clip-path: inset(0 100% 0 0); } 70%, 100% { clip-path: inset(0 0 0 0); } }
-
-/* ScrapTrace: the two score bars fill in turn */
-@keyframes bar-1 { 0% { clip-path: inset(0 100% 0 0); } 30%, 100% { clip-path: inset(0 0 0 0); } }
-@keyframes bar-2 { 0%, 15% { clip-path: inset(0 100% 0 0); } 45%, 100% { clip-path: inset(0 0 0 0); } }
-
-/* EMR: offline with records queued → back online, records synced */
-@keyframes emr-a { 0%, 40% { opacity: 1; } 44%, 95% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes emr-b { 0%, 44% { opacity: 0; } 48%, 92% { opacity: 1; } 95%, 100% { opacity: 0; } }
-
-/* Blue Economy diagram: a pulse runs along the pipeline, left to right */
-@keyframes pipe-run {
-  0% { transform: translateX(-100%); opacity: 0; }
-  6% { opacity: 1; }
-  70% { transform: translateX(0); opacity: 1; }
-  78%, 100% { transform: translateX(0); opacity: 0; }
-}
